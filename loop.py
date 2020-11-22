@@ -59,8 +59,8 @@ def store_metrics():
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_readings, CronTrigger(second='0'))
-    scheduler.add_job(store_metrics, CronTrigger(minute='*/5'))
+    scheduler.add_job(refresh_readings, CronTrigger(second='*/15'))
+    scheduler.add_job(store_metrics, CronTrigger(second='0'))
     scheduler.start()
 
     try:

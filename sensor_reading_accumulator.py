@@ -17,6 +17,7 @@ class SensorReadingAccumulator:
     def read(self):
         try:
             value = self.getter()
+            logger.debug(f'Got value {value} for {self.name}')
             self.readings.append(value)
         except Exception as e:
             logger.error(f'Failed to get {self.name} reading: {e}')
@@ -32,9 +33,11 @@ class SensorReadingAccumulator:
 
     def store(self):
         value = self.get()
+        logger.debug(f'Going to write {value} for {self.name}')
         if value:
             try:
                 write_to_influx(self.name, value)
+                logger.debug(f'Successfully written {self.name} to influx')
             except Exception as e:
                 logger.error(f'Failed to write {self.name}: {e}')
         else:
