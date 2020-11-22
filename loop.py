@@ -1,5 +1,4 @@
 import logging
-import os
 import time
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -16,20 +15,25 @@ sensors = [
 
 
 def refresh_readings():
-    print("Refreshing readings")
+    logging.debug("Refreshing readings")
+    for sensor in sensors:
+        sensor.read()
+
+
+def store_metrics():
+    logging.debug("Saving readings")
+    for sensor in sensors:
+        sensor.store()
 
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
     scheduler.add_job(refresh_readings, CronTrigger(second='0'))
+    scheduler.add_job(store_metrics, CronTrigger(minute='*/5'))
     scheduler.start()
-
-    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-    logging.error('Print something')
 
     try:
         while True:
-            print('tick')
             time.sleep(5)
     except (KeyboardInterrupt, SystemExit):
         scheduler.shutdown()
