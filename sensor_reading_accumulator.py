@@ -5,6 +5,8 @@ from statistics import mean
 from constants import SENSOR_READING_ACCUMULATOR_CAPACITY
 from influx_writer import write_to_influx
 
+logger = logging.getLogger(__name__)
+
 
 class SensorReadingAccumulator:
     def __init__(self, name, getter):
@@ -17,7 +19,7 @@ class SensorReadingAccumulator:
             value = self.getter()
             self.readings.append(value)
         except Exception as e:
-            logging.error(f'Failed to get {self.name} reading: {e}')
+            logger.error(f'Failed to get {self.name} reading: {e}')
             self.readings.append(None)
         if len(self.readings) > SENSOR_READING_ACCUMULATOR_CAPACITY:
             self.readings.popleft()
@@ -31,6 +33,9 @@ class SensorReadingAccumulator:
     def store(self):
         value = self.get()
         if value:
-            write_to_influx(self.name, value)
+            try:
+                write_to_influx(self.name, value)
+            except Exception as e:
+                logger.error(f'Failed to write {self.name}: {e}')
         else:
-            logging.error(f'Failed to write {self.name}: no data')
+            logger.error(f'Failed to write {self.name}: no data')
