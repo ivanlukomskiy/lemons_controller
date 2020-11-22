@@ -5,6 +5,7 @@ import time
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
+from indicators import indicate_ok
 from sensor_reading_accumulator import SensorReadingAccumulator
 from sensors import get_light_level, get_resistive_ground_humidity, get_capacitive_ground_humidity
 
@@ -34,6 +35,8 @@ if level is None:
         f" -- must be one of: {' | '.join(levels.keys())}")
 logging.basicConfig(level=level)
 logger = logging.getLogger(__name__)
+
+indicate_ok()
 
 sensors = [
     SensorReadingAccumulator('light_level', get_light_level),
