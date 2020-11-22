@@ -12,3 +12,4 @@ def write_to_influx(metric_name, value):
     data = []
     timestamp = int(time.time())
     data.append(f'{metric_name} value={value} {timestamp}')
+    client.write_points(data, time_precision='s', protocol='line')
