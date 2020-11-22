@@ -3,6 +3,7 @@ import os
 import time
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 from sensor_reading_accumulator import SensorReadingAccumulator
 from sensors import get_light_level, get_resistive_ground_humidity, get_capacitive_ground_humidity
@@ -20,7 +21,7 @@ def refresh_readings():
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_readings, trigger='cron', seconds='0')
+    scheduler.add_job(refresh_readings, CronTrigger(second='0'))
     scheduler.start()
 
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
