@@ -1,31 +1,31 @@
-import RPi.GPIO as GPIO
+import wiringpi as wp
 
 from constants import GREEN_DIODE_PIN, YELLOW_DIODE_PIN, RED_DIODE_PIN, BUZZER_PIN
 
-GPIO.setmode(GPIO.BCM)
+wp.wiringPiSetup()
 
-GPIO.setup(GREEN_DIODE_PIN, GPIO.OUT)
-GPIO.setup(YELLOW_DIODE_PIN, GPIO.OUT)
-GPIO.setup(RED_DIODE_PIN, GPIO.OUT)
-GPIO.setup(BUZZER_PIN, GPIO.OUT)
+wp.pinMode(GREEN_DIODE_PIN, 1)
+wp.pinMode(YELLOW_DIODE_PIN, 1)
+wp.pinMode(RED_DIODE_PIN, 1)
+wp.pinMode(BUZZER_PIN, 1)
 
 
 def indicate_ok():
-    GPIO.output(GREEN_DIODE_PIN, GPIO.HIGH)
-    GPIO.output(YELLOW_DIODE_PIN, GPIO.LOW)
-    GPIO.output(RED_DIODE_PIN, GPIO.LOW)
-    GPIO.output(BUZZER_PIN, GPIO.LOW)
+    wp.digitalWrite(GREEN_DIODE_PIN, 1)
+    wp.digitalWrite(YELLOW_DIODE_PIN, 0)
+    wp.digitalWrite(RED_DIODE_PIN, 0)
+    wp.digitalWrite(BUZZER_PIN, 0)
 
 
 def indicate_warn():
-    GPIO.output(GREEN_DIODE_PIN, GPIO.HIGH)
-    GPIO.output(YELLOW_DIODE_PIN, GPIO.LOW)
-    GPIO.output(RED_DIODE_PIN, GPIO.LOW)
-    GPIO.output(BUZZER_PIN, GPIO.LOW)
+    wp.digitalWrite(GREEN_DIODE_PIN, 1)
+    wp.digitalWrite(YELLOW_DIODE_PIN, 0)
+    wp.digitalWrite(RED_DIODE_PIN, 0)
+    wp.digitalWrite(BUZZER_PIN, 0)
 
 
 def indicate_critical():
-    GPIO.output(GREEN_DIODE_PIN, GPIO.HIGH)
-    GPIO.output(YELLOW_DIODE_PIN, GPIO.LOW)
-    GPIO.output(RED_DIODE_PIN, GPIO.LOW)
-    GPIO.output(BUZZER_PIN, GPIO.LOW)
+    wp.digitalWrite(GREEN_DIODE_PIN, 1)
+    wp.digitalWrite(YELLOW_DIODE_PIN, 0)
+    wp.digitalWrite(RED_DIODE_PIN, 0)
+    wp.digitalWrite(BUZZER_PIN, 0)
