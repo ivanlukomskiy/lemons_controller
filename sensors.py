@@ -7,13 +7,17 @@ ADC.ADS1256_init()
 ADC_Value = ADC.ADS1256_GetAll()
 
 
+def read(channel):
+    return ADC.ADS1256_GetChannalValue(channel) * 5.0 / 0x7fffff
+
+
 def get_light_level():
-    return 1 / ADC.ADS1256_GetChannalValue(LIGHT_SENSOR_CHANNEL)
+    return 1 / read(LIGHT_SENSOR_CHANNEL)
 
 
 def get_resistive_ground_humidity():
-    return ADC.ADS1256_GetChannalValue(RESISTIVE_GROUND_HUMIDITY_CHANNEL)
+    return read(RESISTIVE_GROUND_HUMIDITY_CHANNEL)
 
 
 def get_capacitive_ground_humidity():
-    return ADC.ADS1256_GetChannalValue(CAPACITIVE_GROUND_HUMIDITY_CHANNEL)
+    return read(CAPACITIVE_GROUND_HUMIDITY_CHANNEL)
