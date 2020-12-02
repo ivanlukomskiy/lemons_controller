@@ -1,4 +1,4 @@
-import ADS1256.config
+import config
 import RPi.GPIO as GPIO
 
 ScanMode = 0
