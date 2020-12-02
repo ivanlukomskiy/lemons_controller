@@ -4,7 +4,7 @@ from influxdb import InfluxDBClient
 
 from constants import DB_NAME
 
-client = InfluxDBClient(host='localhost', port=8086)
+client = InfluxDBClient(host='localhost', port=8088)
 client.switch_database(DB_NAME)
 
 
