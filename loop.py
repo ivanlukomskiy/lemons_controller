@@ -6,7 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from sensor_reading_accumulator import SensorReadingAccumulator
-from sensors import get_light_level, get_resistive_ground_humidity, get_capacitive_ground_humidity, get_air_temperature, \
+from sensors import get_light_level, get_lemon_resistive_soil_moisture, get_lemon_capacitive_soil_moisture, get_air_temperature, \
     get_air_humidity, get_ground_temp
 
 parser = argparse.ArgumentParser()
@@ -38,35 +38,27 @@ logger = logging.getLogger(__name__)
 
 sensors = [
     SensorReadingAccumulator('light_level', get_light_level),
-    SensorReadingAccumulator('resistive_ground_humidity', get_resistive_ground_humidity),
-    SensorReadingAccumulator('capacitive_ground_humidity', get_capacitive_ground_humidity),
+    SensorReadingAccumulator('lemon_resistive_soil_moisture', get_lemon_resistive_soil_moisture),
+    SensorReadingAccumulator('lemon_capacitive_soil_moisture', get_lemon_capacitive_soil_moisture),
     SensorReadingAccumulator('air_temperature', get_air_temperature),
     SensorReadingAccumulator('air_humidity', get_air_humidity),
     SensorReadingAccumulator('ground_temperature', get_ground_temp),
 ]
 
 
-# def refresh_readings():
-#     logger.debug("Refreshing readings")
-#     for sensor in sensors:
-#         sensor.read()
-
-
 def store_metrics():
     logger.debug("Saving readings")
     for sensor in sensors:
         sensor.read()
-        sensor.store()
 
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    # scheduler.add_job(refresh_readings, CronTrigger(second='*/15'))
     scheduler.add_job(store_metrics, CronTrigger(second='0'))
     scheduler.start()
 
     try:
         while True:
-            time.sleep(5)
+            time.sleep(1)
     except (KeyboardInterrupt, SystemExit):
         scheduler.shutdown()

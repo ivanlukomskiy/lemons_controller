@@ -3,7 +3,7 @@ import Adafruit_DHT
 import glob
 import time
 
-from constants import LIGHT_SENSOR_CHANNEL, RESISTIVE_GROUND_HUMIDITY_CHANNEL, CAPACITIVE_GROUND_HUMIDITY_CHANNEL, \
+from constants import LIGHT_SENSOR_CHANNEL, LEMON_RESISTIVE_SOIL_MOISTURE_CHANNEL, LEMON_CAPACITIVE_SOIL_MOISTURE_CHANNEL, \
     DHT_SENSOR, DHT_PIN
 
 
@@ -23,12 +23,12 @@ def get_light_level():
     return 1 / read(LIGHT_SENSOR_CHANNEL)
 
 
-def get_resistive_ground_humidity():
-    return read(RESISTIVE_GROUND_HUMIDITY_CHANNEL)
+def get_lemon_resistive_soil_moisture():
+    return read(LEMON_RESISTIVE_SOIL_MOISTURE_CHANNEL)
 
 
-def get_capacitive_ground_humidity():
-    return read(CAPACITIVE_GROUND_HUMIDITY_CHANNEL)
+def get_lemon_capacitive_soil_moisture():
+    return read(LEMON_CAPACITIVE_SOIL_MOISTURE_CHANNEL)
 
 
 def get_air_temperature():
