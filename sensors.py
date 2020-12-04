@@ -9,7 +9,6 @@ from constants import LIGHT_SENSOR_CHANNEL, RESISTIVE_GROUND_HUMIDITY_CHANNEL, C
 
 ADC = ADS1256.ADS1256()
 ADC.ADS1256_init()
-ADC_Value = ADC.ADS1256_GetAll()
 
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
@@ -17,7 +16,7 @@ device_file = device_folder + '/w1_slave'
 
 
 def read(channel):
-    return ADC.ADS1256_GetChannalValue(channel) / 0x7fffff
+    return ADC.ADS1256_GetAll()[channel] / 0x7fffff
 
 
 def get_light_level():
