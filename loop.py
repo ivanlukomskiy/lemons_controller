@@ -6,7 +6,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from sensor_reading_accumulator import SensorReadingAccumulator
-from sensors import get_light_level, get_resistive_ground_humidity, get_capacitive_ground_humidity
+from sensors import get_light_level, get_resistive_ground_humidity, get_capacitive_ground_humidity, get_air_temperature, \
+    get_air_humidity, get_ground_temp
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -39,6 +40,9 @@ sensors = [
     SensorReadingAccumulator('light_level', get_light_level),
     SensorReadingAccumulator('resistive_ground_humidity', get_resistive_ground_humidity),
     SensorReadingAccumulator('capacitive_ground_humidity', get_capacitive_ground_humidity),
+    SensorReadingAccumulator('air_temperature', get_air_temperature),
+    SensorReadingAccumulator('air_humidity', get_air_humidity),
+    SensorReadingAccumulator('ground_temperature', get_ground_temp),
 ]
 
 
