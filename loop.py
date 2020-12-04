@@ -46,21 +46,22 @@ sensors = [
 ]
 
 
-def refresh_readings():
-    logger.debug("Refreshing readings")
-    for sensor in sensors:
-        sensor.read()
+# def refresh_readings():
+#     logger.debug("Refreshing readings")
+#     for sensor in sensors:
+#         sensor.read()
 
 
 def store_metrics():
     logger.debug("Saving readings")
     for sensor in sensors:
+        sensor.read()
         sensor.store()
 
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_readings, CronTrigger(second='*/15'))
+    # scheduler.add_job(refresh_readings, CronTrigger(second='*/15'))
     scheduler.add_job(store_metrics, CronTrigger(second='0'))
     scheduler.start()
 
