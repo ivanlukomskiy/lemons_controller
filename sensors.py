@@ -7,15 +7,14 @@ from constants import LIGHT_SENSOR_CHANNEL, LEMON_RESISTIVE_SOIL_MOISTURE_CHANNE
     DHT_SENSOR, DHT_PIN
 
 
-ADC = ADS1256.ADS1256()
-ADC.ADS1256_init()
-
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
 
 def read(channel):
+    ADC = ADS1256.ADS1256()
+    ADC.ADS1256_init()
     return ADC.ADS1256_GetAll()[channel] / 0x7fffff
 
 
