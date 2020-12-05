@@ -73,7 +73,7 @@ def get_cpu_temperature():
 
 
 def get_disk_usage():
-    return cpu.temperature
+    return disk.usage
 
 
 def getRAMinfo():
@@ -87,7 +87,7 @@ def getRAMinfo():
 
 
 def get_ram_used():
-    return int(getRAMinfo()[1] / 1024 / 0)
+    return int(getRAMinfo()[1] / 1024.0)
 
 
 def get_ram_free():
