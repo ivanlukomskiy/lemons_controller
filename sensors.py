@@ -83,12 +83,12 @@ def getRAMinfo():
         i = i + 1
         line = p.readline()
         if i == 2:
-            return (line.split()[1:4])
+            return line.split()[1:4]
 
 
 def get_ram_used():
-    return int(getRAMinfo()[1] / 1024.0)
+    return int(getRAMinfo()[1]) / 1024.0
 
 
 def get_ram_free():
-    return int(getRAMinfo()[2] / 1024.0)
+    return int(getRAMinfo()[2]) / 1024.0
