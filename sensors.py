@@ -8,7 +8,7 @@ from gpiozero import LoadAverage, CPUTemperature, DiskUsage
 import ADS1256
 from constants import LIGHT_SENSOR_CHANNEL, LEMON_RESISTIVE_SOIL_MOISTURE_CHANNEL, \
     LEMON_CAPACITIVE_SOIL_MOISTURE_CHANNEL, \
-    DHT_SENSOR, DHT_PIN
+    DHT_SENSOR, DHT_PIN, SPRUCE_CAPACITIVE_SOIL_MOISTURE_CHANNEL
 
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
@@ -33,6 +33,10 @@ def get_lemon_resistive_soil_moisture():
 
 def get_lemon_capacitive_soil_moisture():
     return read(LEMON_CAPACITIVE_SOIL_MOISTURE_CHANNEL)
+
+
+def get_spruce_capacitive_soil_moisture():
+    return read(SPRUCE_CAPACITIVE_SOIL_MOISTURE_CHANNEL)
 
 
 def get_air_temperature():

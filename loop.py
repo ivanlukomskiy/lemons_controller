@@ -8,7 +8,8 @@ from apscheduler.triggers.cron import CronTrigger
 from sensor_reading_accumulator import SensorReadingAccumulator
 from sensors import get_light_level, get_lemon_resistive_soil_moisture, get_lemon_capacitive_soil_moisture, \
     get_air_temperature, \
-    get_air_humidity, get_ground_temp, get_cpu_usage, get_cpu_temperature, get_disk_usage, get_ram_used, get_ram_free
+    get_air_humidity, get_ground_temp, get_cpu_usage, get_cpu_temperature, get_disk_usage, get_ram_used, get_ram_free, \
+    get_spruce_capacitive_soil_moisture
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -41,6 +42,7 @@ sensors = [
     SensorReadingAccumulator('light_level', get_light_level),
     SensorReadingAccumulator('lemon_resistive_soil_moisture', get_lemon_resistive_soil_moisture),
     SensorReadingAccumulator('lemon_capacitive_soil_moisture', get_lemon_capacitive_soil_moisture),
+    SensorReadingAccumulator('spruce_capacitive_soil_moisture', get_spruce_capacitive_soil_moisture),
     SensorReadingAccumulator('air_temperature', get_air_temperature),
     SensorReadingAccumulator('air_humidity', get_air_humidity),
     SensorReadingAccumulator('ground_temperature', get_ground_temp),
