@@ -42,6 +42,8 @@ def get_air_temperature():
 
 def get_air_humidity():
     humidity, _ = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+    if humidity > 100:  # sensor is buggy sometimes
+        return None
     return humidity
 
 
